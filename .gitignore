@@ -1,0 +1,17 @@
+# Dependencias y compilados
+client/node_modules/
+client/dist/
+
+# PocketBase: base de datos local, credenciales del superusuario y binario
+pocketbase/pb_data/
+pocketbase/pocketbase.exe
+pocketbase/pocketbase
+
+# Variables de entorno
+client/.env
+
+# Logs
+*.log
+
+# Mockups y material de referencia del parcial
+imagenes_referencia/
