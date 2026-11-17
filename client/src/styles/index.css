@@ -1,0 +1,660 @@
+/* Paleta del proyecto */
+:root {
+  --almond-cream: #f1dac4;
+  --lilac-ash: #a69cac;
+  --dusty-grape: #474973;
+  --prussian-blue: #161b33;
+  --ink-black: #0d0c1d;
+  --naranja: #f97316;
+
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  background: var(--ink-black);
+  color: var(--almond-cream);
+}
+
+::selection {
+  background: var(--naranja);
+  color: var(--ink-black);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.error {
+  color: #ffb4ab;
+}
+
+/* Texto secundario: mensajes de carga, estados vacíos y ayudas */
+.muted {
+  color: var(--lilac-ash);
+}
+
+/* Diseño general: cabecera arriba, menú a la izquierda y contenido a la derecha */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.cuerpo {
+  display: flex;
+  flex: 1;
+}
+
+.menu {
+  width: 220px;
+  background: var(--prussian-blue);
+  border-right: 1px solid var(--dusty-grape);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* El menú acompaña el scroll: siempre queda a la vista */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menu a {
+  color: var(--lilac-ash);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+}
+
+.menu a:hover {
+  background: var(--dusty-grape);
+}
+
+/* NavLink añade la clase "active" a la página actual */
+.menu a.active {
+  background: var(--naranja);
+  color: var(--ink-black);
+  font-weight: 600;
+}
+
+.contenido {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+/* Cabecera superior: marca, métricas globales y acciones */
+.cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.5rem;
+  background: var(--prussian-blue);
+  border-bottom: 1px solid var(--dusty-grape);
+}
+
+.marca {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.marca-nombre {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--naranja);
+}
+
+.marca-sub {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--lilac-ash);
+}
+
+.cabecera-metricas {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.metrica {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--lilac-ash);
+}
+
+.metrica strong {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1rem;
+  color: var(--almond-cream);
+}
+
+.cabecera-acciones {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.usuario {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.usuario strong {
+  color: var(--almond-cream);
+  font-weight: 600;
+}
+
+.usuario span {
+  color: var(--lilac-ash);
+}
+
+/* Tablero: las tarjetas fluyen en filas y saltan de línea al llegar al borde */
+.tablero-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.equipo {
+  font-weight: 600;
+  margin: 0;
+}
+
+.secundario {
+  color: var(--lilac-ash);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Etiqueta de estado */
+.badge {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--dusty-grape);
+  color: var(--lilac-ash);
+}
+
+.badge-presupuestada {
+  color: var(--almond-cream);
+  border-color: var(--almond-cream);
+}
+
+.badge-lista {
+  background: var(--almond-cream);
+  color: var(--ink-black);
+  border-color: var(--almond-cream);
+}
+
+.detalle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.bloque {
+  background: var(--prussian-blue);
+  border: 1px solid var(--dusty-grape);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bloque h2 {
+  font-size: 1rem;
+  margin-top: 0;
+  color: var(--lilac-ash);
+}
+
+.fotos {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fotos img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--dusty-grape);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.boton {
+  background: var(--almond-cream);
+  color: var(--ink-black);
+  border: 1px solid var(--almond-cream);
+  border-radius: 4px;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.boton-peligro {
+  background: transparent;
+  color: #ffb4ab;
+  border-color: #8a3b43;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.campo span {
+  font-size: 0.85rem;
+  color: var(--lilac-ash);
+}
+
+input,
+textarea {
+  background: var(--ink-black);
+  color: var(--almond-cream);
+  border: 1px solid var(--dusty-grape);
+  border-radius: 4px;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--naranja);
+}
+
+.fila-pieza {
+  display: grid;
+  grid-template-columns: 1fr 80px 110px auto;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fila-pieza input {
+  width: 100%;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  padding: auto;
+
+}
+
+.buscador {
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 1rem;
+}
+
+.layout-dos {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.lista-clientes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item-cliente {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  background: var(--prussian-blue);
+  color: var(--almond-cream);
+  border: 1px solid var(--dusty-grape);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+}
+
+.item-cliente.activo {
+  border-color: var(--naranja);
+}
+
+/* Cliente ya elegido en el formulario de nueva orden */
+.cliente-elegido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--ink-black);
+  border: 1px solid var(--naranja);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Lista de clientes dentro del formulario: altura limitada con scroll */
+.lista-clientes-corta {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 0.75rem;
+}
+
+.linea-tiempo {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid var(--dusty-grape);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.linea-tiempo li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fecha {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--lilac-ash);
+}
+
+.lista-historial {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+/* ===== Colores de acento ===== */
+:root {
+  --acento-celeste: #7dd3fc;
+  --acento-ambar: #fbbf24;
+  --acento-verde: #34d399;
+  --acento-violeta: #a78bfa;
+  --acento-rosa: #fb7185;
+}
+
+/* ===== Etiquetas de estado ===== */
+.badge {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--dusty-grape);
+  color: var(--lilac-ash);
+  white-space: nowrap;
+}
+
+.badge-solicitada     { color: var(--lilac-ash);      border-color: var(--lilac-ash); }
+.badge-en_diagnostico { color: var(--acento-celeste); border-color: var(--acento-celeste); }
+.badge-presupuestada  { color: var(--acento-ambar);   border-color: var(--acento-ambar); }
+.badge-aprobada       { color: var(--acento-verde);   border-color: var(--acento-verde); }
+.badge-en_reparacion  { color: var(--acento-violeta); border-color: var(--acento-violeta); }
+.badge-lista {
+  background: var(--acento-verde);
+  border-color: var(--acento-verde);
+  color: var(--ink-black);
+  font-weight: 700;
+}
+.badge-entregada      { color: var(--lilac-ash); opacity: 0.6; }
+.badge-rechazada      { color: var(--acento-rosa); border-color: var(--acento-rosa); }
+.badge-cancelada      { color: var(--lilac-ash); border-color: var(--dusty-grape); text-decoration: line-through; }
+
+/* ===== Botones ===== */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--naranja);
+  color: var(--ink-black);
+  border: 1px solid var(--naranja);
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, background 0.15s;
+}
+
+.boton:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Acción positiva: aprobar, marcar lista, entregar */
+.boton-verde {
+  background: var(--acento-verde);
+  border-color: var(--acento-verde);
+}
+
+/* Acción secundaria: añadir pieza */
+.boton-secundario {
+  background: transparent;
+  color: var(--almond-cream);
+  border-color: var(--dusty-grape);
+}
+
+.boton-secundario:hover:not(:disabled) {
+  background: var(--dusty-grape);
+}
+
+/* Acción destructiva: cancelar, rechazar, quitar */
+.boton-peligro {
+  background: transparent;
+  color: var(--acento-rosa);
+  border-color: var(--acento-rosa);
+}
+
+.boton-peligro:hover:not(:disabled) {
+  background: rgba(251, 113, 133, 0.15);
+}
+
+/* Navegación hacia atrás dentro de una página */
+.boton-volver {
+  margin-bottom: 1rem;
+}
+
+.menu h2 {
+  margin: 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--lilac-ash);
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card {
+  --acento: var(--lilac-ash);
+
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--dusty-grape);
+  border-radius: 22px;
+  background: linear-gradient(180deg, var(--prussian-blue) 0%, var(--ink-black) 100%);
+  color: var(--almond-cream);
+  text-decoration: none;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  box-shadow: 0 6px 18px rgba(13, 12, 29, 0.45);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 2px var(--acento), 0 14px 30px rgba(13, 12, 29, 0.55);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+}
+
+.card.estado-solicitada { --acento: var(--lilac-ash); }
+.card.estado-en_diagnostico { --acento: var(--acento-celeste); }
+.card.estado-presupuestada { --acento: var(--acento-ambar); }
+.card.estado-aprobada { --acento: var(--acento-verde); }
+.card.estado-en_reparacion { --acento: var(--acento-violeta); }
+.card.estado-lista { --acento: var(--acento-verde); }
+.card.estado-rechazada { --acento: var(--acento-rosa); }
+
+/* Mitad superior: la foto del equipo; degradado de respaldo si no hay foto */
+.card-foto {
+  position: relative;
+  height: 140px;
+  background: linear-gradient(135deg, var(--acento), var(--prussian-blue));
+}
+
+.card-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-foto .badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(13, 12, 29, 0.72);
+  backdrop-filter: blur(4px);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.card-cuerpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px 16px;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: var(--almond-cream);
+}
+
+.card p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--lilac-ash);
+}
+
+.card .problema {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Pie de la tarjeta: código de orden y total del presupuesto, si existe */
+.card-pie {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--acento);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.card .secundario {
+  font-size: 0.8rem;
+  color: var(--lilac-ash);
+  opacity: 0.75;
+}
+
+/* ===== Filtros por etapa del tablero ===== */
+.filtros-etapas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filtro {
+  background: var(--prussian-blue);
+  color: var(--lilac-ash);
+  border: 1px solid var(--dusty-grape);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.filtro:hover {
+  background: var(--dusty-grape);
+  color: var(--almond-cream);
+}
+
+.filtro.activo {
+  background: var(--naranja);
+  border-color: var(--naranja);
+  color: var(--ink-black);
+  font-weight: 600;
+}
