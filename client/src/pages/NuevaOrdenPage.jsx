@@ -69,6 +69,22 @@ export default function NuevaOrdenPage() {
     setTelefono("");
   }
 
+  // Cliente ya registrado con el mismo nombre y teléfono que lo escrito.
+  // Así no se crean duplicados: la orden se asigna a la ficha existente.
+  function clienteExistente() {
+    const nombreBuscado = nombre.trim().toLowerCase();
+    const telefonoBuscado = telefono.trim();
+    if (!nombreBuscado || !telefonoBuscado) return null;
+
+    return (
+      clientes.find(
+        (c) =>
+          c.nombre.trim().toLowerCase() === nombreBuscado &&
+          c.telefono.trim() === telefonoBuscado
+      ) ?? null
+    );
+  }
+
   async function guardar(evento) {
     evento.preventDefault();
     setError(null);
@@ -95,11 +111,16 @@ export default function NuevaOrdenPage() {
           return;
         }
 
-        const cliente = await crearCliente({
-          nombre: nombre.trim(),
-          telefono: telefono.trim(),
-        });
-        clienteId = cliente.id;
+        // Si el cliente ya existe con estos datos, se reutiliza su ficha.
+        const coincidencia = clienteExistente();
+        clienteId = coincidencia
+          ? coincidencia.id
+          : (
+              await crearCliente({
+                nombre: nombre.trim(),
+                telefono: telefono.trim(),
+              })
+            ).id;
       }
 
       // 2. Crear la orden. Se usa FormData porque incluye archivos (las fotos).
@@ -216,6 +237,13 @@ export default function NuevaOrdenPage() {
                   required
                 />
               </label>
+
+              {clienteExistente() && (
+                <p className="aviso">
+                  Este cliente ya está registrado: la orden se asignará a su ficha
+                  existente.
+                </p>
+              )}
             </>
           )}
         </div>

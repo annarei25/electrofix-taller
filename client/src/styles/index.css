@@ -39,6 +39,13 @@ h1 {
   color: var(--lilac-ash);
 }
 
+/* Aviso informativo (por ejemplo, cliente que ya existe) */
+.aviso {
+  color: var(--acento-ambar);
+  font-size: 0.85rem;
+  margin: 0.25rem 0 0;
+}
+
 /* Diseño general: cabecera arriba, menú a la izquierda y contenido a la derecha */
 .app {
   display: flex;
