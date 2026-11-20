@@ -61,7 +61,8 @@ VITE_POCKETBASE_URL=http://127.0.0.1:8090
 
 ## Datos de prueba
 
-La migración `1763500000_datos_de_prueba.js` crea al arrancar por primera vez:
+La aplicación inicial ya incluye datos de prueba. Al crear por primera vez la base
+local, la migración `1763500000_datos_de_prueba.js` carga automáticamente:
 
 | Cliente | Teléfono | Órdenes |
 | --- | --- | --- |
@@ -70,6 +71,26 @@ La migración `1763500000_datos_de_prueba.js` crea al arrancar por primera vez:
 | Carlos Mendoza | 45673219 | Dell XPS 15 en `en_reparacion` |
 
 Cada orden tiene su historial de eventos, para que la línea de tiempo tenga contenido desde el principio.
+
+Los datos de prueba permiten explorar el tablero y los estados sin crear primero
+los registros manualmente. No reemplazan los datos existentes: la migración se
+aplica una sola vez, cuando todavía no estaba registrada en la base local.
+
+### Borrar los datos de prueba y empezar desde cero
+
+1. Detén PocketBase y arráncalo de nuevo.
+2. Abre el panel de administración en `http://127.0.0.1:8090/_/`.
+3. Entra a **Colecciones** y elimina los registros en este orden:
+   - `eventos`
+   - `ordenes`
+   - `clientes`
+4. Recarga la interfaz React. El tablero debe quedar sin órdenes y la lista de
+   clientes sin registros.
+
+La aplicación no permite borrar órdenes ni eventos desde su interfaz o API; por
+eso el borrado inicial se hace desde el panel de administración. Eliminar los
+datos no deshace la migración ni elimina el esquema, así que pueden crearse
+nuevos clientes y órdenes normalmente.
 
 ## Reglas del servidor
 
